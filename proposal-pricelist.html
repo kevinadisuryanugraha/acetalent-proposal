@@ -1,0 +1,2606 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Dokumen Penawaran & Spesifikasi Teknis Redesign Website | Acetalent</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- DNS Prefetch & Font Preload for Peak Performance -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Phosphor Icons CDN -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            border: '#e2e8f0',
+            input: '#e2e8f0',
+            ring: '#0284c7',
+            background: '#f8fafc',
+            foreground: '#0f172a',
+            primary: {
+              DEFAULT: '#0f172a',
+              foreground: '#ffffff',
+            },
+            secondary: {
+              DEFAULT: '#f1f5f9',
+              foreground: '#0f172a',
+            },
+            muted: {
+              DEFAULT: '#f1f5f9',
+              foreground: '#64748b',
+            },
+            accent: {
+              DEFAULT: '#0284c7',
+              foreground: '#ffffff',
+            },
+            card: {
+              DEFAULT: '#ffffff',
+              foreground: '#0f172a',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* Global Reset & Base Typography */
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    *, *::before, *::after {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* GPU Compositor Layer Promotion & Hardware Acceleration */
+    header.sticky {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    #mobile-bottom-nav {
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    /* Modern Rendering Virtualization: Skip off-screen DOM calculations */
+    #profil, #swot, #desain, #pricelist, #komparasi, #faq, #ketentuan {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 700px;
+    }
+
+    /* Lightweight GPU-accelerated Hero Entrance */
+    @keyframes heroEnter {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #audit {
+      animation: heroEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    /* Layout Containers & BKlit Editorial Standards */
+    .doc-container {
+      max-width: 76rem; /* 1216px */
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 0.875rem; /* 14px on mobile: ample space for narrow devices */
+      padding-right: 0.875rem;
+    }
+    @media (min-width: 640px) {
+      .doc-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .doc-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* Scroll Margin Top for all section anchors (tuned for compact mobile header) */
+    section[id], .scroll-anchor {
+      scroll-margin-top: 5.5rem; /* 88px on mobile */
+    }
+    @media (min-width: 640px) {
+      section[id], .scroll-anchor {
+        scroll-margin-top: 6.5rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      section[id], .scroll-anchor {
+        scroll-margin-top: 7rem;
+      }
+    }
+
+    /* Reserve space for mobile bottom nav widget */
+    body {
+      padding-bottom: 5.5rem;
+    }
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 5rem;
+      }
+    }
+
+    /* Hide scrollbar for horizontal subnav tracks */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Sticky first column on comparison table */
+    .sticky-col-header {
+      position: sticky;
+      left: 0;
+      background-color: #f1f5f9;
+      z-index: 20;
+      border-right: 1px solid #e2e8f0;
+      min-width: 145px;
+      box-shadow: 2px 0 6px -2px rgba(15, 23, 42, 0.08);
+    }
+    .sticky-col-cell {
+      position: sticky;
+      left: 0;
+      background-color: #ffffff;
+      z-index: 10;
+      border-right: 1px solid #e2e8f0;
+      min-width: 145px;
+      box-shadow: 2px 0 6px -2px rgba(15, 23, 42, 0.08);
+    }
+
+    /* GPU-Accelerated Scroll Progress Bar (Compositor Thread) */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0284c7, #2563eb);
+      z-index: 9999;
+      transform: scaleX(0);
+      transform-origin: 0% 50%;
+      will-change: transform;
+    }
+
+    
+    /* Super Smooth 60/120fps Scroll Reveal Animation System */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .stagger-1 { transition-delay: 70ms; }
+    .stagger-2 { transition-delay: 140ms; }
+    .stagger-3 { transition-delay: 210ms; }
+    .stagger-4 { transition-delay: 280ms; }
+
+    /* Accessibility: Respect Reduced Motion (R-19 & WCAG) */
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Kokonut UI & 21st.dev: Border Beam Effect for Recommended Card */
+    .border-beam-container {
+      position: relative;
+      overflow: hidden;
+      contain: paint;
+    }
+    .border-beam-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(transparent, transparent, transparent, #0284c7, transparent);
+      animation: rotate-beam 6s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .border-beam-inner {
+      position: relative;
+      background: #ffffff;
+      border-radius: 0.875rem;
+      z-index: 1;
+      height: 100%;
+    }
+    @keyframes rotate-beam {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Kokonut UI: Shimmer Button Sweep */
+    .btn-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shimmer::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(30deg) translateX(-100%);
+      transition: transform 0.75s ease;
+    }
+    .btn-shimmer:hover::after {
+      transform: rotate(30deg) translateX(100%);
+    }
+
+    /* Shadcn UI Card Standard */
+    .shadcn-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.875rem;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+    }
+    .shadcn-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Table Scrollbar */
+    .table-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+    .table-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Print Document Formatting */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      header, footer, .no-print, button, #scroll-progress {
+        display: none !important;
+      }
+      .shadcn-card, .border-beam-inner {
+        background: #ffffff !important;
+        border: 1px solid #94a3b8 !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        transform: none !important;
+      }
+      a {
+        text-decoration: none !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-20 antialiased selection:bg-sky-100 selection:text-sky-900">
+
+  <!-- Motion Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- ================= SHADCN / BKLIT EXECUTIVE UNIFIED HEADER (ZERO OVERLAP) ================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    
+    <!-- Row 1: Brand & Top Nav Links -->
+    <div class="doc-container py-2.5 sm:py-3 flex items-center justify-between gap-3 sm:gap-4">
+      
+      <!-- Brand & Metadata Header (Perfect Proportional Alignment) -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white shrink-0 font-extrabold text-xs sm:text-base tracking-wider shadow-sm border border-slate-800">
+          AT
+        </div>
+        <div class="flex flex-col justify-center">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="text-sm sm:text-lg font-extrabold tracking-tight text-slate-900 leading-none">ACETALENT</span>
+            <span class="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wider leading-none">PRD 2025</span>
+          </div>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium leading-none mt-1 sm:mt-1.5 whitespace-nowrap hidden xs:block">Dokumen Penawaran & Spesifikasi Teknis</span>
+        </div>
+      </div>
+
+      <!-- Quick Section Jump Nav (Desktop - Shadcn / BKlit Segmented Pill) -->
+      <nav class="hidden lg:flex items-center gap-1 p-1 rounded-lg bg-slate-100/90 border border-slate-200/80 text-xs font-semibold text-slate-600 shrink-0">
+        <a href="#audit" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Audit Situasi</a>
+        <a href="#profil" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Riset Acetalent</a>
+        <a href="#swot" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Analisis SWOT</a>
+        <a href="#desain" class="px-2.5 py-1 rounded-md whitespace-nowrap text-sky-800 font-bold bg-white shadow-sm border border-slate-200/60 transition-all">8 Pilihan Desain</a>
+        <a href="#pricelist" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Pilihan Paket</a>
+        <a href="#komparasi" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Tabel Matriks</a>
+        <a href="#ketentuan" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Ketentuan</a>
+        <a href="#faq" class="px-2.5 py-1 rounded-md whitespace-nowrap hover:text-slate-900 hover:bg-white hover:shadow-sm transition-all">Tanya Jawab</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="window.print()" class="btn-shimmer flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 min-h-[36px]">
+          <i class="ph-bold ph-printer text-sm"></i>
+          <span class="hidden sm:inline">Cetak / Simpan</span> PDF
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Sub-Nav View Switcher Tabs & Mobile Quick Track -->
+    <div class="border-t border-slate-100 bg-slate-50/90 py-1.5 sm:py-2">
+      <div class="doc-container flex items-center justify-between gap-3 sm:gap-4">
+        
+        <!-- View Switcher Tabs (Proposal vs PRD) -->
+        <div class="flex items-center gap-1 p-1 bg-slate-200/80 rounded-lg text-xs font-semibold w-full sm:w-auto shrink-0">
+          <button onclick="switchTab('proposal')" id="tab-btn-proposal" class="flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md bg-white text-slate-900 shadow-sm transition-all flex items-center justify-center gap-1.5 text-center text-xs font-bold min-h-[36px]">
+            <i class="ph-bold ph-file-text text-sky-600 text-sm"></i> <span>Proposal Ringkas</span>
+          </button>
+          <button onclick="switchTab('prd')" id="tab-btn-prd" class="flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center text-xs font-semibold min-h-[36px]">
+            <i class="ph-bold ph-code-block text-slate-500 text-sm"></i> <span>Spesifikasi PRD</span>
+          </button>
+        </div>
+
+        <div class="text-xs text-slate-500 hidden sm:flex items-center gap-2 shrink-0">
+          <i class="ph-bold ph-clock-countdown text-emerald-600"></i>
+          <span>Target Selesai: <strong>Maksimal 9 Hari Kerja</strong></span>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </header>
+
+  <!-- ================= PROPOSAL CONTENT TAB ================= -->
+  <main id="view-proposal">
+    
+    <!-- ================= 1. RINGKASAN EKSEKUTIF & AUDIT SITUASI ================= -->
+    <section id="audit" class="doc-container pt-6 sm:pt-10 pb-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card border border-slate-200 overflow-hidden">
+        
+        <!-- Top Header Area -->
+        <div class="p-4 sm:p-6 md:p-8 border-b border-slate-200 bg-white">
+          <div class="flex items-center gap-2 flex-wrap mb-3">
+            <span class="inline-flex items-center rounded-md bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-semibold text-amber-800">
+              <i class="ph-bold ph-info mr-1"></i> Audit Situasi & Latar Belakang
+            </span>
+            <span class="text-xs text-slate-400">•</span>
+            <span class="text-xs text-slate-500 font-medium">Domain Resmi: <strong class="text-slate-700">acetalent.my</strong></span>
+          </div>
+          
+          <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug mb-3">
+            Proposal Pembaruan & Redesign Website Resmi Acetalent
+          </h1>
+          
+          <p class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed max-w-4xl">
+            Hasil pemeriksaan teknis langsung pada situs web resmi (<a href="https://acetalent.my/" target="_blank" rel="noopener noreferrer" class="text-sky-700 underline font-semibold hover:text-sky-800">acetalent.my</a>) menemukan kendala kritis yang memerlukan perbaikan segera: beranda saat ini tidak memunculkan konten visual karena kerusakan kode <code class="text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded text-xs border border-rose-200 font-mono font-bold">[layerslider id="4"]</code> dan server Exabytes masih berjalan pada PHP versi 5.6 yang sudah kedaluwarsa.
+          </p>
+        </div>
+
+        <!-- Problem vs Solution Direct Mapping (Symmetrical Table Grid) -->
+        <div class="p-4 sm:p-6 md:p-8 bg-slate-50/50">
+          
+          <div class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h2 class="text-sm sm:text-base font-bold text-slate-900">
+                Matriks Audit Permasalahan & Rencana Solusi
+              </h2>
+              <p class="text-xs text-slate-500">
+                Pemetaan langsung dari setiap kendala teknis saat ini menuju solusi target terima beres.
+              </p>
+            </div>
+            <div class="flex items-center gap-3 text-[11px] font-semibold">
+              <span class="inline-flex items-center gap-1.5 text-rose-700">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> Kendala Saat Ini
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-sky-700">
+                <span class="w-2 h-2 rounded-full bg-sky-600"></span> Solusi Kami
+              </span>
+            </div>
+          </div>
+
+          <!-- Symmetrical 5-Row Comparison Table -->
+          <div class="rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+            
+            <!-- Table Header -->
+            <div class="grid grid-cols-1 md:grid-cols-2 border-b border-slate-200 bg-slate-100/80 text-xs font-bold text-slate-700">
+              <div class="p-3 sm:px-4 flex items-center gap-2 border-b md:border-b-0 md:border-r border-slate-200 text-rose-900 bg-rose-50/50">
+                <i class="ph-bold ph-warning text-rose-600 text-base"></i>
+                <span>Kondisi & Kendala Website Saat Ini (As-Is)</span>
+              </div>
+              <div class="p-3 sm:px-4 flex items-center gap-2 text-sky-900 bg-sky-50/50">
+                <i class="ph-bold ph-check-circle text-sky-600 text-base"></i>
+                <span>Rencana Solusi Terima Beres (To-Be)</span>
+              </div>
+            </div>
+
+            <!-- Rows (5 Pairs) -->
+            <div class="divide-y divide-slate-200 text-xs">
+              
+              <!-- Row 1: Beranda -->
+              <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-slate-50/60 transition-colors">
+                <div class="p-3.5 sm:px-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-start gap-2.5">
+                  <i class="ph-bold ph-x text-rose-500 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Beranda Mengalami Blank Error:</strong>
+                    <span class="text-slate-600 leading-relaxed">Halaman utama hanya memunculkan kode teks <code class="text-rose-700 font-mono text-[11px]">[layerslider]</code>, membuat profil perusahaan terlihat rusak bagi pengunjung.</span>
+                  </div>
+                </div>
+                <div class="p-3.5 sm:px-4 flex items-start gap-2.5 bg-sky-50/20">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Redesign Beranda Modern & Kredibel:</strong>
+                    <span class="text-slate-600 leading-relaxed">Pembersihan kode rusak dan pembangunan banner pengenalan baru yang elegan, profesional, dan nyaman dibaca di smartphone.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 2: Server & Keamanan -->
+              <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-slate-50/60 transition-colors">
+                <div class="p-3.5 sm:px-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-start gap-2.5">
+                  <i class="ph-bold ph-x text-rose-500 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Server PHP 5.6 Usang (Rentan Peretasan):</strong>
+                    <span class="text-slate-600 leading-relaxed">Hosting Exabytes berjalan pada versi lama yang sudah tidak menerima pembaruan keamanan sejak 2018.</span>
+                  </div>
+                </div>
+                <div class="p-3.5 sm:px-4 flex items-start gap-2.5 bg-sky-50/20">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Pembaruan PHP 8.1 & Akselerasi LiteSpeed:</strong>
+                    <span class="text-slate-600 leading-relaxed">Peningkatan keamanan di cPanel Exabytes dan aktivasi cache server agar halaman terbuka cepat di bawah 2 detik.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 3: Konversi Klien B2B -->
+              <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-slate-50/60 transition-colors">
+                <div class="p-3.5 sm:px-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-start gap-2.5">
+                  <i class="ph-bold ph-x text-rose-500 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Sulit Dihubungi Calon Klien Korporat:</strong>
+                    <span class="text-slate-600 leading-relaxed">Tidak tersedia tombol kontak cepat sehingga calon rekanan perusahaan kesulitan meminta penawaran SDM.</span>
+                  </div>
+                </div>
+                <div class="p-3.5 sm:px-4 flex items-start gap-2.5 bg-sky-50/20">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Tombol Langsung WhatsApp & Form Penawaran:</strong>
+                    <span class="text-slate-600 leading-relaxed">Pemasangan tombol WhatsApp 1-klik dan formulir kebutuhan tenaga kerja yang langsung terhubung ke tim sales.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 4: Pengumpulan Berkas CV Pelamar -->
+              <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-slate-50/60 transition-colors">
+                <div class="p-3.5 sm:px-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-start gap-2.5">
+                  <i class="ph-bold ph-x text-rose-500 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Kandidat Tidak Dapat Kirim CV Online:</strong>
+                    <span class="text-slate-600 leading-relaxed">Pencari kerja tidak memiliki saluran resmi untuk mengirimkan berkas lamaran secara terpusat.</span>
+                  </div>
+                </div>
+                <div class="p-3.5 sm:px-4 flex items-start gap-2.5 bg-sky-50/20">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Fitur Unggah Berkas CV PDF Langsung ke Email:</strong>
+                    <span class="text-slate-600 leading-relaxed">Pelamar dapat melampirkan resume secara terorganisir, otomatis terkirim rapi ke email resmi manajemen.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Row 5: Ketiadaan Divisi IT -->
+              <div class="grid grid-cols-1 md:grid-cols-2 hover:bg-slate-50/60 transition-colors">
+                <div class="p-3.5 sm:px-4 border-b md:border-b-0 md:border-r border-slate-200 flex items-start gap-2.5">
+                  <i class="ph-bold ph-x text-rose-500 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Tanpa Divisi IT In-House di Perusahaan:</strong>
+                    <span class="text-slate-600 leading-relaxed">Tidak ada staf teknis untuk memperbaiki bug, merawat hosting, atau mengelola konten berkala.</span>
+                  </div>
+                </div>
+                <div class="p-3.5 sm:px-4 flex items-start gap-2.5 bg-sky-50/20">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <div>
+                    <strong class="text-slate-900 block font-semibold mb-0.5">Layanan 100% Terima Beres & Pendampingan:</strong>
+                    <span class="text-slate-600 leading-relaxed">Seluruh urusan teknis ditangani tim kami, dilengkapi panduan operasional mudah dan garansi resmi.</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Bottom Integrated Assurance Bar (4 Segments with Animated Counters - 2x2 on Mobile, 4x1 on Desktop) -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border-t border-slate-200 text-xs">
+          
+          <div class="p-3 sm:p-4 md:p-5 bg-slate-50 flex items-start gap-2.5 sm:gap-3">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 text-base sm:text-lg">
+              <i class="ph-bold ph-timer"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block uppercase font-bold tracking-wider mb-0.5">Batas Waktu</span>
+              <strong class="text-slate-900 block text-xs sm:text-sm font-extrabold leading-tight">3 sampai 9 Hari</strong>
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block mt-0.5 leading-tight">Maks 1 minggu + 2 hari</span>
+            </div>
+          </div>
+
+          <div class="p-3 sm:p-4 md:p-5 bg-slate-50 flex items-start gap-2.5 sm:gap-3">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-base sm:text-lg">
+              <i class="ph-bold ph-hard-drives"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block uppercase font-bold tracking-wider mb-0.5">Hosting Server</span>
+              <strong class="text-slate-900 block text-xs sm:text-sm font-extrabold leading-tight">Exabytes Klien</strong>
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block mt-0.5 leading-tight">Tanpa sewa baru</span>
+            </div>
+          </div>
+
+          <div class="p-3 sm:p-4 md:p-5 bg-slate-50 flex items-start gap-2.5 sm:gap-3">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-slate-200 text-slate-800 flex items-center justify-center shrink-0 text-base sm:text-lg">
+              <i class="ph-bold ph-handshake"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block uppercase font-bold tracking-wider mb-0.5">Model Layanan</span>
+              <strong class="text-slate-900 block text-xs sm:text-sm font-extrabold leading-tight">Terima Beres</strong>
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block mt-0.5 leading-tight">Bebas beban staf</span>
+            </div>
+          </div>
+
+          <div class="p-3 sm:p-4 md:p-5 bg-slate-50 flex items-start gap-2.5 sm:gap-3">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-base sm:text-lg">
+              <i class="ph-bold ph-shield-check"></i>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block uppercase font-bold tracking-wider mb-0.5">Purnajual</span>
+              <strong class="text-slate-900 block text-xs sm:text-sm font-extrabold leading-tight">Garansi s/d 60 Hari</strong>
+              <span class="text-[9px] sm:text-[11px] text-slate-500 block mt-0.5 leading-tight">Dukungan penuh</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 2. BENTO GRID ARCHITECTURE (KOKONUT UI / BKLIT) ================= -->
+    <section id="profil" class="doc-container py-5 sm:py-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <div class="max-w-3xl mb-6">
+          <span class="inline-flex items-center rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-semibold text-slate-700 mb-2">
+            Bagian 1: Data Perusahaan Klien
+          </span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Profil Bisnis Acetalent dan Potensi Pasar
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Acetalent (sebelumnya beroperasi dengan nama <strong>HR & Staffing Solutions Sdn Bhd</strong>) memiliki kantor operasional di Menara Public Bank Lantai 24, Jalan Wong Ah Fook, Johor Bahru, serta kantor pusat di Kuching, Sarawak.
+          </p>
+        </div>
+
+        <!-- 3 Bento Cards (Clean Architecture) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-6 text-xs">
+          <div class="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center text-base mb-2.5 font-bold">
+              1
+            </div>
+            <strong class="text-slate-900 block font-bold mb-1 text-sm">Penempatan Karyawan Tetap</strong>
+            <p class="text-slate-600 leading-relaxed">
+              Perekrutan tenaga kerja permanen untuk posisi spesialis maupun level manajerial di berbagai perusahaan rekanan.
+            </p>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-base mb-2.5 font-bold">
+              2
+            </div>
+            <strong class="text-slate-900 block font-bold mb-1 text-sm">Staf Kontrak Berjangka</strong>
+            <p class="text-slate-600 leading-relaxed">
+              Penyediaan karyawan kontrak untuk kebutuhan proyek berskala besar dengan jangka waktu tertentu.
+            </p>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-base mb-2.5 font-bold">
+              3
+            </div>
+            <strong class="text-slate-900 block font-bold mb-1 text-sm">Tenaga Kerja Temporer</strong>
+            <p class="text-slate-600 leading-relaxed">
+              Solusi pemenuhan tenaga kerja jangka pendek untuk mendukung kelancaran operasional perusahaan saat lonjakan beban kerja.
+            </p>
+          </div>
+        </div>
+
+        <!-- 7 Sektor Industri Utama yang Dilayani -->
+        <div>
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
+            7 Sektor Industri yang Ditampilkan pada Website Baru:
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-2.5 text-xs text-center">
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Manufaktur</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Pabrik & Perakitan</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Minyak & Gas</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Pengerang & Offshore</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Teknologi IT</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Engineer & Teknis</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Kesehatan</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Medis & Farmasi</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Perbankan</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Keuangan & Asuransi</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Logistik</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Pelabuhan & Transport</span>
+            </div>
+            <div class="p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 hover:border-slate-300 transition-colors col-span-2 sm:col-span-3 md:col-span-1">
+              <strong class="text-slate-900 block font-semibold mb-0.5 text-xs">Pusat Kontak</strong>
+              <span class="text-[10px] sm:text-[11px] text-slate-500">Call Centre & CS</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 3. ANALISIS SWOT KOMPREHENSIF (100% PRESISI DATA RIIL) ================= -->
+    <section id="swot" class="doc-container py-5 sm:py-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <div class="max-w-3xl mb-6">
+          <span class="inline-flex items-center rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-semibold text-slate-700 mb-2">
+            Bagian 2: Analisis SWOT Berbasis Data Audit Riil
+          </span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Analisis Kekuatan, Kelemahan, Peluang, dan Ancaman
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Pemetaan objektif 100% presisi berdasarkan audit teknis domain acetalent.my, kondisi server Exabytes, serta peluang koridor ekonomi Johor dan Singapura.
+          </p>
+        </div>
+
+        <!-- Grid SWOT 2x2 Simetris & Berimbang -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs mb-6">
+          
+          <!-- STRENGTHS -->
+          <div class="p-4 sm:p-5 rounded-xl border border-emerald-200 bg-emerald-50/40 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
+                <strong class="text-emerald-900 text-xs uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-shield-check text-emerald-700 text-base"></i>
+                  <span>Strengths (Kekuatan Acetalent)</span>
+                </strong>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Internal</span>
+              </div>
+              <ul class="space-y-2 text-slate-700">
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-check text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Dua Lokasi Kantor Fisik Resmi:</strong> Menara Public Bank Lantai 24 Johor Bahru dan Kantor Pusat (Head Office) di Kuching, Sarawak.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-check text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Legalitas Entitas Terverifikasi:</strong> Domain resmi .my terdaftar di MyNIC/SSM Malaysia (dahulu HR & Staffing Solutions Sdn Bhd).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-check text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Infrastruktur Server LiteSpeed Aktif:</strong> Akun hosting Exabytes sudah menggunakan LiteSpeed Enterprise berkecepatan tinggi.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-check text-emerald-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Portofolio Rekrutmen 7 Sektor:</strong> Manufaktur, Migas, TI, Kesehatan, Perbankan, Logistik, dan Pusat Layanan Pelanggan.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- WEAKNESSES -->
+          <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-rose-50/40 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
+                <strong class="text-rose-900 text-xs uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-warning-octagon text-rose-600 text-base"></i>
+                  <span>Weaknesses (Kelemahan Saat Ini)</span>
+                </strong>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-rose-100 text-rose-800">Internal</span>
+              </div>
+              <ul class="space-y-2 text-slate-700">
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-x text-rose-500 shrink-0 mt-0.5"></i>
+                  <span><strong>Beranda Mengalami Blank Error:</strong> Halaman utama hanya memunculkan kode teks mentah [layerslider id="4"] akibat plugin mati.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-x text-rose-500 shrink-0 mt-0.5"></i>
+                  <span><strong>Server PHP 5.6.40 Sangat Usang:</strong> Berjalan pada versi EOL sejak 2018 yang rentan malware di hosting Exabytes.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-x text-rose-500 shrink-0 mt-0.5"></i>
+                  <span><strong>Saluran Konversi Klien B2B Nihil:</strong> Belum ada tombol WhatsApp mengambang 1-klik maupun form permintaan staf korporat.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-x text-rose-500 shrink-0 mt-0.5"></i>
+                  <span><strong>Ketiadaan Divisi IT In-House:</strong> Tidak ada staf pengembang internal untuk merawat web dan memperbarui info loker.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- OPPORTUNITIES -->
+          <div class="p-4 sm:p-5 rounded-xl border border-sky-200 bg-sky-50/40 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
+                <strong class="text-sky-900 text-xs uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-trend-up text-sky-600 text-base"></i>
+                  <span>Opportunities (Peluang Pasar)</span>
+                </strong>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-sky-100 text-sky-800">Eksternal</span>
+              </div>
+              <ul class="space-y-2 text-slate-700">
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-arrow-up-right text-sky-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Koridor Ekonomi Johor-Singapura (JS-SEZ):</strong> Ratusan pabrik dan data center baru membutuhkan mitra rekrutmen lokal terpercaya.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-arrow-up-right text-sky-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Pencarian Mitra Rekrutmen di Google:</strong> Pimpinan HR korporat mencari agensi penyedia tenaga kerja di Johor Bahru via internet.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-arrow-up-right text-sky-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Pembangunan Database CV Mandiri:</strong> Mengumpulkan berkas resume pelamar via web tanpa terus membayar portal JobStreet/LinkedIn.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- THREATS -->
+          <div class="p-4 sm:p-5 rounded-xl border border-amber-200 bg-amber-50/40 flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
+                <strong class="text-amber-900 text-xs uppercase tracking-wider font-bold flex items-center gap-1.5">
+                  <i class="ph-bold ph-shield-warning text-amber-600 text-base"></i>
+                  <span>Threats (Ancaman Bisnis)</span>
+                </strong>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-100 text-amber-800">Eksternal</span>
+              </div>
+              <ul class="space-y-2 text-slate-700">
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-warning text-amber-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Pembatalan Kontrak Vendor Multinasional:</strong> Klien Singapura yang melakukan due diligence mencoret Acetalent karena web dianggap tutup.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-warning text-amber-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Dominasi Agensi Kompetitor:</strong> Agensi pesaing memiliki website responsif dengan respon cepat via WhatsApp dan katalog loker aktif.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i class="ph-bold ph-warning text-amber-600 shrink-0 mt-0.5"></i>
+                  <span><strong>Risiko Keamanan & Penangguhan Server:</strong> Celah keamanan PHP lama berisiko disusupi malware yang dapat disuspend oleh Exabytes.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- S-O, W-O, S-T, W-T Strategic Synthesis Bar -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed">
+          <strong class="text-slate-900 block font-semibold mb-1">Formulasi Strategi Redesign (Sintesis SWOT):</strong>
+          Memanfaatkan legalitas entitas resmi dan dua kantor fisik Johor Bahru & Kuching (S) untuk menyerap ledakan kebutuhan tenaga kerja kawasan industri JS-SEZ (O), sekaligus membersihkan error beranda dan menambal keamanan server PHP Exabytes (W) guna mencegah pembatalan kontrak kerjasama oleh klien korporat multinasional (T).
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= 3. GALERI 8 WEBSITE COMPANY PROFILE RESMI KELAS DUNIA ================= -->
+    <section id="desain" class="doc-container py-6 sm:py-10 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-6">
+          <div class="flex items-center gap-2 flex-wrap mb-2">
+            <span class="inline-flex items-center rounded-md bg-sky-50 border border-sky-200 px-2.5 py-0.5 text-xs font-semibold text-sky-800">
+              <i class="ph-bold ph-globe mr-1"></i> Bagian 3: 8 Referensi Website Company Profile Kelas Dunia
+            </span>
+            <span class="text-xs text-slate-400 hidden sm:inline">•</span>
+            <span class="text-xs text-slate-500 font-medium">Klik pada setiap kartu untuk membuka langsung situs web resminya</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+            Inspirasi Desain dari Perusahaan Ketenagakerjaan & Konsultan Terkemuka Dunia
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+            Berikut adalah 8 rujukan situs web profil perusahaan (company profile) profesional paling terkenal di tingkat global. Silakan klik kartu atau tombol tautan pada masing-masing referensi untuk meninjau langsung situs resminya, serta pelajari deskripsi analisa desain di bawahnya untuk menentukan arah visual yang paling disukai Acetalent.
+          </p>
+        </div>
+
+        <!-- 8 World-Class Company Profile Cards (Proportional 2 Columns on Desktop, 1 Column on Mobile) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+
+          <!-- CARD 1: RANDSTAD GLOBAL -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-sky-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-blue-900 text-white flex items-center justify-center font-black text-sm tracking-wider shadow-xs shrink-0">
+                    R
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Randstad Global</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 uppercase">Fortune Global 500</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Diemen, Belanda (Penyedia Tenaga Kerja No. 1 Dunia)</span>
+                  </div>
+                </div>
+                <a href="https://www.randstad.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-sky-50 text-slate-600 hover:text-sky-700 transition-colors shrink-0" title="Buka randstad.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.randstad.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-blue-200 bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-blue-200 mb-2 pb-2 border-b border-blue-800/80">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> randstad.com</span>
+                  <span class="text-[10px] font-bold text-sky-300 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-sky-300 uppercase tracking-widest block mb-1">Dual-Track Architecture</span>
+                <h4 class="text-sm sm:text-base font-bold text-white leading-snug mb-1.5">
+                  Human Forward: Navigasi Dua Jalur untuk Pemberi Kerja & Pencari Kerja
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-blue-100">
+                  <span class="px-2 py-0.5 rounded bg-blue-800/80 border border-blue-700">Jalur Klien B2B</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-800/80 border border-blue-700">Jalur Pelamar Kerja</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button (Min 44px tap target) -->
+              <a href="https://www.randstad.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Kunjungi Website Resmi Randstad</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Dominasi warna Deep Navy (#0f172a) dan Electric Blue (#0284c7) dengan kanvas putih bersih. Tipografi tegas berorientasi pada kecepatan pemindaian informasi tanpa distraksi visual.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Menghilangkan kebingungan pengunjung melalui Dual-Track Entry Point. Klien perusahaan langsung menemukan formulir penawaran dalam 1 klik tanpa harus menyusuri menu berbelit-belit.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Mengadopsi pemisahan tombol di beranda: satu tombol WhatsApp untuk klien korporat industri Johor, dan satu tombol kirim CV PDF untuk pelamar kerja.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 2: THE ADECCO GROUP -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-red-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-red-700 text-white flex items-center justify-center font-black text-sm tracking-wider shadow-xs shrink-0">
+                    AG
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">The Adecco Group</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-red-50 text-red-800 border border-red-200 uppercase">Swiss Global Leader</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Zurich, Swiss (Penyedia Solusi SDM Terkemuka di 60 Negara)</span>
+                  </div>
+                </div>
+                <a href="https://www.adeccogroup.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-700 transition-colors shrink-0" title="Buka adeccogroup.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.adeccogroup.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-red-200 bg-gradient-to-br from-slate-900 via-stone-900 to-red-950 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-red-200 mb-2 pb-2 border-b border-red-900/60">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> adeccogroup.com</span>
+                  <span class="text-[10px] font-bold text-red-400 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-red-400 uppercase tracking-widest block mb-1">Corporate B2B & Advisory</span>
+                <h4 class="text-sm sm:text-base font-bold text-white leading-snug mb-1.5">
+                  Making the Future Work for Everyone: Ekosistem Talenta Global
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-stone-200">
+                  <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700">Multi-Brand Advisory</span>
+                  <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700">Workforce Intelligence</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.adeccogroup.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Kunjungi Website Resmi The Adecco Group</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Aksen merah marun khas Swiss dipadukan dengan kanvas putih dan abu-abu arsitektural. Menonjolkan struktur grid korporat resmi yang berwibawa tinggi.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Penyajian portofolio multi-sektor yang rapi, laporan analisa tenaga kerja yang mudah diakses, dan pengelompokan keahlian industri terstruktur.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Menampilkan 7 sektor industri Acetalent (Manufaktur, Migas, TI, Kesehatan, Perbankan, Logistik, CS) dengan kartu modular yang memiliki bobot visual seimbang.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 3: KORN FERRY -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-amber-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-slate-950 text-amber-400 flex items-center justify-center font-bold text-sm tracking-wider shadow-xs border border-slate-800 shrink-0">
+                    KF
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Korn Ferry</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 uppercase">NYSE: KFY</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Los Angeles, AS (Firma Executive Search Terbesar Dunia)</span>
+                  </div>
+                </div>
+                <a href="https://www.kornferry.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-amber-50 text-slate-600 hover:text-amber-700 transition-colors shrink-0" title="Buka kornferry.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.kornferry.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/40 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-slate-400 mb-2 pb-2 border-b border-slate-800">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> kornferry.com</span>
+                  <span class="text-[10px] font-bold text-amber-400 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-amber-400 uppercase tracking-widest block mb-1">Executive Leadership</span>
+                <h4 class="text-sm sm:text-base font-serif font-bold text-slate-100 leading-snug mb-1.5">
+                  Be More Than: Penasihat Kepemimpinan & Perekrutan Level Direksi
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-amber-200">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">Board & CEO Services</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">Executive Placement</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.kornferry.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi Korn Ferry</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Warna Deep Sapphire Navy dipadu aksen emas sampanye (Champagne Gold). Memadukan tipografi serif berwibawa dengan spasi bernapas lebar yang tenang dan prestisius.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Fokus pada pembangunan reputasi dan wibawa jangka panjang untuk menarik minat dewan komisaris dan manajer puncak korporat multinasional.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Sangat tepat untuk menonjolkan kantor fisik Acetalent di Menara Public Bank Lt. 24 Johor Bahru, membuktikan bahwa Acetalent adalah mitra rekrutmen level eksekutif yang berkelas.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 4: MCKINSEY & COMPANY -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-slate-400 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-serif font-black text-sm tracking-wider shadow-xs shrink-0">
+                    McK
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">McKinsey & Company</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-200 uppercase">Top Strategy Advisory</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">New York, AS (Standar Emas Konsultan Manajemen Korporat)</span>
+                  </div>
+                </div>
+                <a href="https://www.mckinsey.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors shrink-0" title="Buka mckinsey.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.mckinsey.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-slate-300 bg-gradient-to-br from-white via-slate-50 to-slate-100 text-slate-900 p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-slate-600 mb-2 pb-2 border-b border-slate-200">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-600"></i> mckinsey.com</span>
+                  <span class="text-[10px] font-bold text-slate-900 group-hover:text-sky-700 flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Editorial Excellence</span>
+                <h4 class="text-sm sm:text-base font-serif font-bold text-slate-950 leading-snug mb-1.5">
+                  Insights to Impact: Tata Kelola Berbasis Bukti dan Akuntabilitas
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-slate-700">
+                  <span class="px-2 py-0.5 rounded bg-white border border-slate-200">Legal Compliance</span>
+                  <span class="px-2 py-0.5 rounded bg-white border border-slate-200">Strategic Workforce</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.mckinsey.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi McKinsey & Company</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Monokromatik minimalis dengan aksen biru tua pekat. Menghilangkan ornamen klise untuk memberi fokus penuh pada ketajaman data dan legalitas formal.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Struktur navigasi seperti lembaran riset profesional, sangat nyaman dibaca oleh pimpinan korporat, direktur legal, dan manajer keuangan.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Membangun citra Acetalent sebagai mitra ketenagakerjaan yang mematuhi Akta Kerja Malaysia 100%, terdaftar di MyNIC/SSM, dan melindungi klien dari sengketa ketenagakerjaan.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 5: ROBERT WALTERS MALAYSIA -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-emerald-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white flex items-center justify-center font-black text-sm tracking-wider shadow-xs shrink-0">
+                    RW
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Robert Walters</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 uppercase">Malaysia & APAC Hub</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">London / Kuala Lumpur (Spesialis Rekrutmen Profesional Terkemuka)</span>
+                  </div>
+                </div>
+                <a href="https://www.robertwalters.com.my/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 transition-colors shrink-0" title="Buka robertwalters.com.my di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.robertwalters.com.my/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-emerald-200 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-950 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-emerald-200 mb-2 pb-2 border-b border-emerald-900/60">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> robertwalters.com.my</span>
+                  <span class="text-[10px] font-bold text-emerald-400 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest block mb-1">APAC Career Gateway</span>
+                <h4 class="text-sm sm:text-base font-bold text-white leading-snug mb-1.5">
+                  Powering People and Organisations to Fulfil Their Potential
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-emerald-200">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">Live Role Search Bar</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">Salary Benchmark Reports</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.robertwalters.com.my/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi Robert Walters Malaysia</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Kontras tinggi warna hitam arang dan aksen hijau zamrud (Emerald). Terlihat modern, dinamis, dan sangat relevan dengan kebiasaan pengguna web di Asia Tenggara.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Bar pencarian di posisi teratas memudahkan pengunjung langsung mengecek lowongan atau mencari tenaga ahli berdasarkan kota (Johor Bahru, Kuala Lumpur, Kuching).
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Menjadi contoh ideal jika Acetalent memilih Paket Enterprise, di mana Acetalent dapat memajang daftar loker aktif dan menerima kiriman berkas CV pelamar secara otomatis.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 6: BRUNEL INTERNATIONAL -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-amber-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-black text-sm tracking-wider shadow-xs shrink-0">
+                    BR
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Brunel International</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 uppercase">Euronext: BRNL</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Amsterdam, Belanda (Spesialis Tenaga Kerja Migas, Energi & Manufaktur)</span>
+                  </div>
+                </div>
+                <a href="https://www.brunel.net/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-amber-50 text-slate-600 hover:text-amber-800 transition-colors shrink-0" title="Buka brunel.net di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.brunel.net/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-amber-300 bg-gradient-to-br from-slate-900 via-slate-800 to-amber-950/50 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-amber-200 mb-2 pb-2 border-b border-slate-700">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> brunel.net</span>
+                  <span class="text-[10px] font-bold text-amber-400 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-amber-400 uppercase tracking-widest block mb-1">Heavy Industry & Engineering</span>
+                <h4 class="text-sm sm:text-base font-bold text-white leading-snug mb-1.5">
+                  Connecting Specialists to Pioneering Projects Around the World
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-amber-300">
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700">Oil & Gas / Offshore</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700">Plant Automation</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.brunel.net/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi Brunel International</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Steel Slate kokoh dipadu warna kuning keselamatan (Safety Amber). Mengesankan ketahanan operasional, kedisiplinan keselamatan kerja, dan kompetensi teknis lapangan.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Penyajian klaster proyek industri yang sangat jelas, memudahkan manajer pabrik memahami cakupan keahlian teknisi yang disalurkan.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Sangat selaras untuk menonjolkan kekuatan Acetalent di kawasan industri Pasir Gudang, kilang migas Pengerang (PIPC), dan pelabuhan peti kemas Tanjung Pelepas.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 7: EGON ZEHNDER -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-sky-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm tracking-wider shadow-xs shrink-0">
+                    EZ
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">Egon Zehnder</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-200 uppercase">Swiss Precision</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Zurich, Swiss (Konsultan Kepemimpinan & Dewan Direksi Independen)</span>
+                  </div>
+                </div>
+                <a href="https://www.egonzehnder.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors shrink-0" title="Buka egonzehnder.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.egonzehnder.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-900 p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-slate-500 mb-2 pb-2 border-b border-slate-100">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-600"></i> egonzehnder.com</span>
+                  <span class="text-[10px] font-bold text-slate-900 group-hover:text-sky-700 flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-sky-700 uppercase tracking-widest block mb-1">Swiss Style Minimalist</span>
+                <h4 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1.5">
+                  Leadership for a Better World: Grid Geometris dan Tipografi Presisi
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-slate-600">
+                  <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200">Clean Grid Architecture</span>
+                  <span class="px-2 py-0.5 rounded bg-slate-100 border border-slate-200">Zero Clutter</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.egonzehnder.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi Egon Zehnder</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Minimalisme geometris murni dengan kontras hitam-putih tajam dan aksen biru langit tipis. Bebas dari bayangan tebal atau gradasi norak bawaan template AI.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Sangat ringan dan cepat dimuat di ponsel (Core Web Vitals optimal). Pembaca tidak terdistraksi dan langsung fokus pada pesan profesional perusahaan.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Menerapkan layout 4-kotak modular yang higienis untuk menyajikan status legalitas, 7 sektor industri, 2 lokasi kantor fisik, dan masa garansi resmi.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CARD 8: MANPOWERGROUP GLOBAL -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 flex flex-col justify-between shadow-xs scroll-reveal hover:border-blue-300 hover:shadow-md transition-all">
+            <div>
+              <!-- Header -->
+              <div class="flex items-start justify-between gap-3 mb-3.5 pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div class="w-10 h-10 rounded-xl bg-blue-800 text-white flex items-center justify-center font-black text-sm tracking-wider shadow-xs shrink-0">
+                    MP
+                  </div>
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight">ManpowerGroup</h3>
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 uppercase">Fortune 500 Staffing</span>
+                    </div>
+                    <span class="text-[11px] text-slate-500 block mt-0.5 truncate">Milwaukee, AS (Pelopor Solusi Ketenagakerjaan B2B Lebih dari 70 Tahun)</span>
+                  </div>
+                </div>
+                <a href="https://www.manpowergroup.com/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 transition-colors shrink-0" title="Buka manpowergroup.com di tab baru">
+                  <i class="ph-bold ph-arrow-square-out text-base"></i>
+                </a>
+              </div>
+
+              <!-- Visual Preview Banner -->
+              <a href="https://www.manpowergroup.com/" target="_blank" rel="noopener noreferrer" class="group block relative overflow-hidden rounded-xl border border-blue-200 bg-gradient-to-br from-blue-900 via-slate-900 to-blue-950 text-white p-4 mb-3.5 transition-transform hover:scale-[1.01]">
+                <div class="flex items-center justify-between text-[11px] text-blue-200 mb-2 pb-2 border-b border-blue-800">
+                  <span class="font-mono flex items-center gap-1"><i class="ph-bold ph-lock text-emerald-400"></i> manpowergroup.com</span>
+                  <span class="text-[10px] font-bold text-sky-300 group-hover:text-white flex items-center gap-1">
+                    Buka Situs Resmi <i class="ph-bold ph-arrow-up-right"></i>
+                  </span>
+                </div>
+                <span class="text-[9px] font-bold text-sky-300 uppercase tracking-widest block mb-1">Workforce Solutions Leader</span>
+                <h4 class="text-sm sm:text-base font-bold text-white leading-snug mb-1.5">
+                  Humanly Possible: Penyalur Tenaga Kerja Terintegrasi Berbasis Hasil
+                </h4>
+                <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-sky-200">
+                  <span class="px-2 py-0.5 rounded bg-blue-950/80 border border-blue-800">Global Workforce Index</span>
+                  <span class="px-2 py-0.5 rounded bg-blue-950/80 border border-blue-800">Integrated Talent</span>
+                </div>
+              </a>
+
+              <!-- Single Direct Button -->
+              <a href="https://www.manpowergroup.com/" target="_blank" rel="noopener noreferrer" class="btn-shimmer flex items-center justify-center gap-2 w-full py-2.5 sm:py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-xs min-h-[44px] mb-3.5">
+                <span>Buka Website Resmi ManpowerGroup</span>
+                <i class="ph-bold ph-arrow-square-out text-sm"></i>
+              </a>
+
+              <!-- Analysis -->
+              <div class="space-y-2 text-xs text-slate-700 bg-slate-50 rounded-xl p-3.5 border border-slate-200">
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Karakter Desain:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Warna biru korporat percaya diri dengan tombol aksi kontras tinggi. Mengarahkan perhatian pembaca langsung pada solusi pemenuhan tenaga kerja tanpa bertele-tele.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Kekuatan UX:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Alur penawaran kemitraan yang sangat jelas, memberikan kepastian kepada calon klien korporat mengenai alur operasional dari tahap seleksi hingga penempatan.
+                  </p>
+                </div>
+                <div>
+                  <strong class="text-slate-900 font-bold block mb-0.5">Rekomendasi untuk Acetalent:</strong>
+                  <p class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                    Sangat cocok dipadukan dengan tombol WhatsApp mengambang 1-klik dan alur 3-tahap kerjasama (Konsultasi -> Seleksi Kandidat -> Penempatan Bergaransi).
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 4. PILIHAN PAKET INVESTASI (KOKONUT BEAM & 21ST.DEV SELECTION) ================= -->
+    <section id="pricelist" class="doc-container py-6 sm:py-10 scroll-mt-28 sm:scroll-mt-32">
+      
+      <div class="max-w-3xl mb-6 sm:mb-8">
+        <span class="inline-flex items-center rounded-md bg-sky-50 border border-sky-200 px-2.5 py-0.5 text-xs font-semibold text-sky-800 mb-2">
+          Bagian 4: Pilihan Paket & Biaya Investasi
+        </span>
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+          3 Pilihan Paket Investasi Redesign
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+          Seluruh paket menggunakan skema <strong>Terima Beres</strong> pada server Exabytes yang sudah ada, tanpa biaya langganan server baru, dan selesai dalam waktu <strong>maksimal 1 minggu + 2 hari kerja</strong>.
+        </p>
+      </div>
+
+      <!-- 3 PRICING CARDS (REALISTIC, PROFESSIONAL, ANTI-OVERENGINEERING) -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch mb-8">
+        
+        <!-- PAKET 1: STARTER -->
+        <div class="shadcn-card p-4 sm:p-6 flex flex-col justify-between scroll-reveal stagger-1">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                Paket 1
+              </span>
+              <span class="text-xs font-bold text-emerald-700">
+                3 sampai 5 Hari Kerja
+              </span>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1">Starter (Pemulihan Cepat)</h3>
+            <p class="text-xs text-slate-500 mb-4">Fokus memulihkan situs web agar kembali aktif, rapi, dan bebas kode error.</p>
+
+            <!-- Price Box with Dynamic Counter -->
+            <div class="mb-5 p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="text-[11px] text-slate-500 block mb-0.5 font-medium">Biaya Investasi:</span>
+              <div class="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
+                <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 whitespace-nowrap count-number" data-target="1500000">Rp 1.500.000</span>
+                <span class="text-xs text-slate-500 whitespace-nowrap">/ Selesai</span>
+              </div>
+            </div>
+
+            <!-- Feature Deliverables (10 Items: Realistic & Grounded) -->
+            <div class="space-y-2.5 text-xs mb-6">
+              <strong class="text-slate-900 block font-bold text-[11px] uppercase tracking-wider mb-2.5">
+                Cakupan Fitur & Fasilitas:
+              </strong>
+              
+              <div class="flex items-start gap-2 text-slate-700">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Perbaikan Beranda Error & Banner Baru</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-700">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Kapasitas 4 s/d 5 Halaman Inti Perusahaan</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-700">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Pembaruan Keamanan PHP 8.1 Exabytes</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-700">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Pendaftaran Google Search Console</span>
+              </div>
+
+              <!-- Excluded Items (Muted with X Icon) -->
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Tombol WhatsApp Mengambang 1-Klik</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Formulir Permintaan Staf Klien B2B</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Fitur Unggah Berkas CV Pelamar (PDF)</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Showcase Visual 7 Sektor Industri</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Penyetelan LiteSpeed Cache Exabytes</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-400">
+                <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                <span class="line-through">Halaman Daftar Lowongan Kerja Aktif</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200 mt-auto">
+            <div class="text-[11px] text-slate-500 mb-3 flex items-center justify-between">
+              <span>Garansi: <strong>14 Hari</strong></span>
+              <span>Target: <strong>Max 5 Hari</strong></span>
+            </div>
+            <button onclick="pilihPaket('Paket Starter (Rp 1.500.000)')" class="btn-shimmer w-full py-3 px-4 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all text-center min-h-[44px]">
+              Pilih Paket Starter
+            </button>
+          </div>
+        </div>
+
+        <!-- PAKET 2: BUSINESS GROWTH (KOKONUT BORDER BEAM EFFECT) -->
+        <div class="border-beam-container rounded-2xl p-[2px] bg-sky-200/50 shadow-md scroll-reveal stagger-2">
+          <div class="border-beam-inner p-4 sm:p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="inline-flex items-center rounded-md bg-sky-100 border border-sky-200 px-2 py-0.5 text-[11px] font-bold text-sky-800">
+                  <i class="ph-fill ph-crown mr-1 text-amber-500"></i> Paling Direkomendasikan
+                </span>
+                <span class="text-xs font-bold text-sky-700">
+                  6 sampai 7 Hari Kerja
+                </span>
+              </div>
+
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-1">Business Growth</h3>
+              <p class="text-xs text-slate-500 mb-4">Dirancang khusus untuk agensi rekrutmen: mempermudah kontak klien dan penerimaan CV.</p>
+
+              <!-- Price Box with Dynamic Counter -->
+              <div class="mb-5 p-3 sm:p-4 rounded-xl bg-sky-50/80 border border-sky-200">
+                <span class="text-[11px] text-slate-500 block mb-0.5 font-medium">Biaya Investasi:</span>
+                <div class="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
+                  <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 whitespace-nowrap count-number" data-target="3200000">Rp 3.200.000</span>
+                  <span class="text-xs text-slate-500 whitespace-nowrap">/ Selesai</span>
+                </div>
+                <span class="text-[11px] text-sky-800 font-medium block mt-0.5">
+                  Pilihan terbaik dengan manfaat bisnis paling seimbang
+                </span>
+              </div>
+
+              <!-- Feature Deliverables (10 Items: Realistic & Grounded) -->
+              <div class="space-y-2.5 text-xs mb-6">
+                <strong class="text-slate-900 block font-bold text-[11px] uppercase tracking-wider mb-2.5">
+                  Cakupan Fitur & Fasilitas:
+                </strong>
+                
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Perbaikan Beranda Error & Banner Baru</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Kapasitas 6 s/d 8 Halaman Terstruktur</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Pembaruan Keamanan PHP 8.1 Exabytes</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Pendaftaran Google Search Console</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Tombol WhatsApp Mengambang 1-Klik</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Formulir Permintaan Staf Klien B2B</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Fitur Unggah Berkas CV Pelamar (PDF)</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Showcase Visual 7 Sektor Industri</span>
+                </div>
+                <div class="flex items-start gap-2 text-slate-800 font-medium">
+                  <i class="ph-bold ph-check text-sky-600 text-sm shrink-0 mt-0.5"></i>
+                  <span>Penyetelan LiteSpeed Cache Exabytes</span>
+                </div>
+
+                <!-- Excluded Items in Tier 2 (Muted with X Icon) -->
+                <div class="flex items-start gap-2 text-slate-400">
+                  <i class="ph-bold ph-x text-slate-300 text-sm shrink-0 mt-0.5"></i>
+                  <span class="line-through">Halaman Daftar Lowongan Kerja Aktif</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200 mt-auto">
+              <div class="text-[11px] text-slate-500 mb-3 flex items-center justify-between font-medium">
+                <span>Garansi: <strong class="text-slate-900">30 Hari Penuh</strong></span>
+                <span>Target: <strong class="text-sky-700">1 Minggu Selesai</strong></span>
+              </div>
+              <button onclick="pilihPaket('Paket Business Growth (Rp 3.200.000)')" class="btn-shimmer w-full py-3 px-4 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-700 text-white transition-all text-center shadow-md min-h-[44px]">
+                Pilih Paket Business Growth
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAKET 3: ENTERPRISE -->
+        <div class="shadcn-card p-4 sm:p-6 flex flex-col justify-between scroll-reveal stagger-3">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                Paket 3
+              </span>
+              <span class="text-xs font-bold text-amber-700">
+                8 sampai 9 Hari Kerja
+              </span>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1">Enterprise Professional</h3>
+            <p class="text-xs text-slate-500 mb-4">Solusi terlengkap: sistem publikasi lowongan mandiri dan landing page khusus penawaran B2B.</p>
+
+            <!-- Price Box with Dynamic Counter -->
+            <div class="mb-5 p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200">
+              <span class="text-[11px] text-slate-500 block mb-0.5 font-medium">Biaya Investasi:</span>
+              <div class="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
+                <span class="text-2xl sm:text-3xl font-extrabold text-slate-900 whitespace-nowrap count-number" data-target="4900000">Rp 4.900.000</span>
+                <span class="text-xs text-slate-500 whitespace-nowrap">/ Selesai</span>
+              </div>
+            </div>
+
+            <!-- Feature Deliverables (All 10 Features Included!) -->
+            <div class="space-y-2.5 text-xs mb-6">
+              <strong class="text-slate-900 block font-bold text-[11px] uppercase tracking-wider mb-2.5">
+                Cakupan Fitur & Fasilitas:
+              </strong>
+              
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Perbaikan Beranda Error & Banner Baru</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Kapasitas Hingga 12 Halaman Lengkap</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Pembaruan Keamanan PHP 8.1 Exabytes</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Pendaftaran Google Search Console</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Tombol WhatsApp Mengambang 1-Klik</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Formulir Permintaan Staf Klien B2B</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Fitur Unggah Berkas CV Pelamar (PDF)</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Showcase Visual 7 Sektor Industri</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Penyetelan LiteSpeed Cache Exabytes</span>
+              </div>
+              <div class="flex items-start gap-2 text-slate-800 font-medium">
+                <i class="ph-bold ph-check text-emerald-600 text-sm shrink-0 mt-0.5"></i>
+                <span>Halaman Daftar Lowongan Kerja Aktif (Bisa Diisi Sendiri)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-200 mt-auto">
+            <div class="text-[11px] text-slate-500 mb-3 flex items-center justify-between">
+              <span>Garansi: <strong>60 Hari Penuh</strong></span>
+              <span>Target: <strong>Max 9 Hari</strong></span>
+            </div>
+            <button onclick="pilihPaket('Paket Enterprise Professional (Rp 4.900.000)')" class="btn-shimmer w-full py-3 px-4 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all text-center min-h-[44px]">
+              Pilih Paket Enterprise
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 5. TABEL PERBANDINGAN FITUR LENGKAP ================= -->
+    <section id="komparasi" class="doc-container py-5 sm:py-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <div class="max-w-3xl mb-6">
+          <span class="inline-flex items-center rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-semibold text-slate-700 mb-2">
+            Bagian 5: Matriks Evaluasi
+          </span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Tabel Perbandingan Rinci Antar Paket
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Perbandingan menyeluruh yang selaras dengan rincian fitur pada kartu paket penawaran.
+          </p>
+        </div>
+
+        <!-- Mobile Scroll Indicator Hint -->
+        <div class="sm:hidden flex items-center gap-2 p-2.5 rounded-lg bg-sky-50 border border-sky-200 text-sky-800 text-xs font-semibold mb-3">
+          <i class="ph-bold ph-arrows-left-right text-base text-sky-600 shrink-0"></i>
+          <span>Geser tabel ke samping untuk melihat seluruh komparasi paket</span>
+        </div>
+
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-[640px] sm:min-w-[700px] w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-100 text-slate-700 font-bold">
+                <th class="py-3 px-3.5 sm:px-4 w-[30%] sm:w-[28%] sticky-col-header">Parameter Evaluasi</th>
+                <th class="py-3 px-3.5 sm:px-4 w-[23%] sm:w-[24%]">Starter</th>
+                <th class="py-3 px-3.5 sm:px-4 w-[23%] sm:w-[24%] bg-sky-50 text-sky-900">Business Growth (Rekomendasi)</th>
+                <th class="py-3 px-3.5 sm:px-4 w-[24%]">Enterprise Professional</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700 bg-white">
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Biaya Investasi</td>
+                <td class="py-3 px-3.5 sm:px-4 font-semibold text-slate-900">Rp 1.500.000</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-bold text-sky-900 text-sm">Rp 3.200.000</td>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900">Rp 4.900.000</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Waktu Penyelesaian</td>
+                <td class="py-3 px-3.5 sm:px-4 text-emerald-700 font-semibold">3 sampai 5 Hari Kerja</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 text-sky-900 font-bold">6 sampai 7 Hari Kerja</td>
+                <td class="py-3 px-3.5 sm:px-4 text-amber-800 font-semibold">8 sampai 9 Hari Kerja</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Fokus Manfaat Utama</td>
+                <td class="py-3 px-3.5 sm:px-4">Pemulihan cepat & profil dasar legalitas.</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-medium text-slate-900">Penjualan jasa B2B & penerimaan CV pelamar.</td>
+                <td class="py-3 px-4">Katalog lowongan aktif & materi penawaran B2B.</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Kapasitas Halaman Profil</td>
+                <td class="py-3 px-3.5 sm:px-4">4 s/d 5 Halaman Inti</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-semibold text-slate-900">6 s/d 8 Halaman Terstruktur</td>
+                <td class="py-3 px-3.5 sm:px-4">Hingga 12 Halaman Lengkap</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Perbaikan Beranda Error</td>
+                <td class="py-3 px-3.5 sm:px-4"><span class="inline-flex items-center gap-1 text-emerald-700"><i class="ph-bold ph-check text-emerald-600"></i> Termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50"><span class="inline-flex items-center gap-1 text-sky-800 font-semibold"><i class="ph-bold ph-check text-sky-600"></i> Termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4"><span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><i class="ph-bold ph-check text-emerald-600"></i> Termasuk</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Keamanan PHP 8.1 Exabytes</td>
+                <td class="py-3 px-3.5 sm:px-4"><span class="inline-flex items-center gap-1 text-emerald-700"><i class="ph-bold ph-check text-emerald-600"></i> Termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50"><span class="inline-flex items-center gap-1 text-sky-800 font-semibold"><i class="ph-bold ph-check text-sky-600"></i> Termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4"><span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><i class="ph-bold ph-check text-emerald-600"></i> Termasuk</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Pendaftaran Google Search</td>
+                <td class="py-3 px-3.5 sm:px-4">Pendaftaran Standar</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-semibold text-sky-900">Optimasi Kata Kunci Agensi</td>
+                <td class="py-3 px-3.5 sm:px-4 font-semibold text-slate-900">Optimasi Kata Kunci Agensi</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Tombol WhatsApp Mengambang</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400"><span class="inline-flex items-center gap-1"><i class="ph-bold ph-x text-slate-300"></i> Tidak termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50"><span class="inline-flex items-center gap-1 text-sky-800 font-semibold"><i class="ph-bold ph-check text-sky-600"></i> Tombol 1-Klik</span></td>
+                <td class="py-3 px-3.5 sm:px-4"><span class="inline-flex items-center gap-1 text-emerald-700 font-semibold"><i class="ph-bold ph-check text-emerald-600"></i> Tombol 1-Klik</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Formulir Kebutuhan Staf B2B</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400">Pesan umum biasa</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-semibold text-slate-900">Form spesifikasi tenaga kerja</td>
+                <td class="py-3 px-3.5 sm:px-4 font-semibold text-slate-900">Form penawaran korporat lengkap</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Pengiriman Berkas CV Pelamar</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400"><span class="inline-flex items-center gap-1"><i class="ph-bold ph-x text-slate-300"></i> Belum tersedia</span></td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-medium text-slate-900">Upload berkas PDF langsung ke email</td>
+                <td class="py-3 px-3.5 sm:px-4 font-medium text-slate-900">Upload berkas PDF langsung ke email</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Showcase 7 Sektor Industri</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400">Teks ringkas dasar</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-semibold text-slate-900">Tampilan visual 7 industri</td>
+                <td class="py-3 px-3.5 sm:px-4 font-semibold text-slate-900">Tampilan visual 7 industri</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Penyetelan LiteSpeed Cache</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400">Kecepatan server standar</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-semibold text-slate-900">Tuning cache Exabytes</td>
+                <td class="py-3 px-3.5 sm:px-4 font-semibold text-slate-900">Tuning cache Exabytes</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Halaman Lowongan Kerja Aktif</td>
+                <td class="py-3 px-3.5 sm:px-4 text-slate-400"><span class="inline-flex items-center gap-1"><i class="ph-bold ph-x text-slate-300"></i> Tidak termasuk</span></td>
+                <td class="py-3 px-4 bg-sky-50/50 text-slate-400"><span class="inline-flex items-center gap-1"><i class="ph-bold ph-x text-slate-300"></i> Tidak termasuk</span></td>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-emerald-800"><span class="inline-flex items-center gap-1"><i class="ph-bold ph-check text-emerald-600"></i> Bisa diisi sendiri via dashboard</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Pengelolaan oleh Staf Non-IT</td>
+                <td class="py-3 px-3.5 sm:px-4">Dikelola penuh oleh tim kami</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50">Halaman ubah kontak & panduan ringkas</td>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900">Bisa posting lowongan sendiri via dashboard</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900 sticky-col-cell">Masa Garansi Purnajual</td>
+                <td class="py-3 px-3.5 sm:px-4">14 Hari</td>
+                <td class="py-3 px-3.5 sm:px-4 bg-sky-50/50 font-bold text-sky-900">30 Hari Penuh</td>
+                <td class="py-3 px-3.5 sm:px-4 font-bold text-slate-900">60 Hari Penuh</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 6. INTERACTIVE FAQ ACCORDION (21ST.DEV STYLE) ================= -->
+    <section id="faq" class="doc-container py-5 sm:py-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <div class="max-w-3xl mb-6">
+          <span class="inline-flex items-center rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-semibold text-slate-700 mb-2">
+            Bagian 6: Pertanyaan Kerap Diajukan (FAQ)
+          </span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Klarifikasi Transparan untuk Manajemen Acetalent
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Klik pada setiap pertanyaan untuk membuka rincian penjelasannya secara interaktif.
+          </p>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          
+          <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/60">
+            <button onclick="toggleAccordion('faq-1')" class="w-full p-3.5 sm:p-4 text-left font-bold text-slate-900 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition-colors min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
+              <span class="text-xs sm:text-sm leading-snug">Apakah Acetalent perlu membeli atau memindahkan hosting Exabytes yang sekarang?</span>
+              <i id="faq-1-icon" class="ph-bold ph-caret-down text-base transition-transform duration-200 shrink-0"></i>
+            </button>
+            <div id="faq-1-content" class="hidden p-4 pt-0 text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+              <strong>Tidak perlu.</strong> Hosting Exabytes yang dimiliki Acetalent saat ini sudah menggunakan server LiteSpeed yang berkualitas. Tim kami hanya membutuhkan akses cPanel untuk memperbarui versi PHP lama ke PHP 8.1 dan menyetel cache performa agar website beroperasi maksimal tanpa biaya langganan server baru.
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/60">
+            <button onclick="toggleAccordion('faq-2')" class="w-full p-3.5 sm:p-4 text-left font-bold text-slate-900 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition-colors min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
+              <span class="text-xs sm:text-sm leading-snug">Bagaimana jika staf kantor kami sama sekali tidak mengerti masalah koding?</span>
+              <i id="faq-2-icon" class="ph-bold ph-caret-down text-base transition-transform duration-200 shrink-0"></i>
+            </button>
+            <div id="faq-2-content" class="hidden p-4 pt-0 text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+              Seluruh sistem dirancang dengan antarmuka yang sangat mudah dipahami. Pada Paket 2 dan Paket 3, staf kantor Anda dapat mengubah nomor telepon, alamat, atau mengunggah info lowongan kerja baru semudah mengetik di Microsoft Word tanpa perlu paham koding.
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/60">
+            <button onclick="toggleAccordion('faq-3')" class="w-full p-3.5 sm:p-4 text-left font-bold text-slate-900 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition-colors min-h-[48px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
+              <span class="text-xs sm:text-sm leading-snug">Apakah batas waktu 9 hari kerja benar-benar terjamin selesai?</span>
+              <i id="faq-3-icon" class="ph-bold ph-caret-down text-base transition-transform duration-200 shrink-0"></i>
+            </button>
+            <div id="faq-3-content" class="hidden p-4 pt-0 text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
+              <strong>Ya, terjamin.</strong> Kami menggunakan metode kerja sprint harian yang terukur. Begitu akses cPanel Exabytes diberikan, pekerjaan langsung dieksekusi dari Hari 1 (perbaikan beranda error & server) hingga Hari 8-9 (uji coba formulir & peluncuran resmi).
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 6. KETENTUAN KERJASAMA, PEMBAYARAN & KEAMANAN ================= -->
+    <section id="ketentuan" class="doc-container py-5 sm:py-6 scroll-mt-28 sm:scroll-mt-32">
+      <div class="shadcn-card p-4 sm:p-6 md:p-8 border border-slate-200 scroll-reveal">
+        
+        <div class="max-w-3xl mb-6">
+          <span class="inline-flex items-center rounded-md bg-slate-100 border border-slate-200 px-2.5 py-0.5 text-xs font-semibold text-slate-700 mb-2">
+            Bagian 7: Ketentuan Kerjasama & Perlindungan Klien
+          </span>
+          <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 tracking-tight mb-2">
+            Tata Cara Kerjasama, Skema Pembayaran, dan Keamanan Server
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Transparansi penuh untuk menjamin kelancaran pengerjaan, perlindungan data perusahaan, dan kenyamanan manajemen Acetalent.
+          </p>
+        </div>
+
+        <!-- 4 Grid Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs">
+          
+          <!-- Card 1: Pembayaran -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <div class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center text-base">
+                <i class="ph-bold ph-credit-card"></i>
+              </div>
+              <span>1. Skema Pembayaran Bertahap (Termin 50/50)</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Uang Muka (DP) 50%:</strong> Dibayarkan saat penawaran disepakati bersama dan sebelum konfigurasi server Exabytes dimulai.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Pelunasan 50%:</strong> Dibayarkan setelah seluruh pekerjaan selesai, diuji bersama (UAT), dan situs web siap dipublikasikan penuh ke domain acetalent.my.
+            </p>
+            <span class="text-[11px] text-emerald-800 font-medium block pt-1 border-t border-slate-200">
+              Tidak ada biaya tersembunyi selama masa pengembangan proyek.
+            </span>
+          </div>
+
+          <!-- Card 2: Keamanan Server Exabytes -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-base">
+                <i class="ph-bold ph-shield-check"></i>
+              </div>
+              <span>2. Protokol Keamanan & Perlindungan Server</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Pencadangan Penuh (Full Backup):</strong> Backup basis data MySQL dan seluruh berkas lama dilakukan sebelum kami menyentuh konfigurasi server.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Kerahasiaan Kredensial:</strong> Akses akun cPanel Exabytes dijamin kerahasiaannya dan hanya digunakan untuk instalasi perbaikan.
+            </p>
+            <span class="text-[11px] text-sky-800 font-medium block pt-1 border-t border-slate-200">
+              Klien dianjurkan mereset kata sandi cPanel setelah serah terima selesai demi kedaulatan keamanan perusahaan.
+            </span>
+          </div>
+
+          <!-- Card 3: Batasan Ruang Lingkup -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <div class="w-7 h-7 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-base">
+                <i class="ph-bold ph-bounding-box"></i>
+              </div>
+              <span>3. Batasan Ruang Lingkup Pekerjaan</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Materi & Legalitas:</strong> Bahan teks profil khusus, foto kantor, dan dokumen legalitas disediakan oleh pihak Acetalent.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Biaya Berlangganan Server:</strong> Biaya perpanjangan tahunan domain .my dan hosting Exabytes tetap menjadi kewajiban langsung klien ke pihak Exabytes.
+            </p>
+            <span class="text-[11px] text-slate-500 block pt-1 border-t border-slate-200">
+              Revisi mencakup penataan tata letak, warna, teks, dan fungsi fitur yang disepakati (bukan penambahan modul baru di luar paket).
+            </span>
+          </div>
+
+          <!-- Card 4: Garansi & Purnajual -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm">
+              <div class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-base">
+                <i class="ph-bold ph-clock-countdown"></i>
+              </div>
+              <span>4. Cakupan Garansi Purnajual Resmi</span>
+            </div>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Jaminan Perbaikan:</strong> Perbaikan cepat tanpa biaya tambahan jika terjadi kendala teknis, tampilan bergeser, atau form email mengalami masalah pasca-peluncuran.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              <strong>• Durasi Garansi Resmi:</strong> Berlaku selama 14 hari (Starter), 30 hari penuh (Business Growth), atau 60 hari penuh (Enterprise).
+            </p>
+            <span class="text-[11px] text-emerald-800 font-medium block pt-1 border-t border-slate-200">
+              Memberikan rasa aman penuh bagi manajemen Acetalent yang tidak memiliki staf pengembang IT internal.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= PRD TECHNICAL SPECIFICATION TAB (SHADCN / BKLIT PRD DASHBOARD) ================= -->
+  <section id="view-prd" class="doc-container py-6 sm:py-8 scroll-mt-28 sm:scroll-mt-32 hidden">
+    <div class="shadcn-card p-4 sm:p-6 md:p-10 border border-slate-200 space-y-6 sm:space-y-8">
+      
+      <!-- PRD Document Header -->
+      <div class="border-b border-slate-200 pb-6">
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <span class="inline-flex items-center rounded-md bg-purple-50 border border-purple-200 px-2.5 py-0.5 text-xs font-semibold text-purple-800">
+            <i class="ph-bold ph-code-block mr-1"></i> Product Requirement Document (PRD) V2.0
+          </span>
+          <span class="text-xs text-slate-400">•</span>
+          <span class="text-xs text-slate-500 font-medium">Standar Rekayasa Perangkat Lunak Acuan Development PRD Template.docx</span>
+        </div>
+        
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug mb-2">
+          Spesifikasi Teknis & Kepatuhan Rekayasa Sistem
+        </h2>
+        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-4xl">
+          Dokumentasi formal spesifikasi kebutuhan produk yang mengacu langsung pada struktur resmi <code>Development PRD Template.docx</code>: mencakup persyaratan non-teknis, konfigurasi lingkungan hosting Exabytes, diagram alur persona pengguna, dan kamus glosarium istilah.
+        </p>
+      </div>
+
+      <!-- 4 Core PRD Metadata Chips -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 text-xs">
+        <div class="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-500 block text-[10px] sm:text-[11px] uppercase font-bold tracking-wider mb-1">Status Proyek</span>
+          <strong class="text-slate-900 block text-xs sm:text-sm">Redesign & Pemulihan</strong>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5 truncate">Website Resmi acetalent.my</span>
+        </div>
+        <div class="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-500 block text-[10px] sm:text-[11px] uppercase font-bold tracking-wider mb-1">Klien Entitas</span>
+          <strong class="text-slate-900 block text-xs sm:text-sm">Acetalent Malaysia</strong>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5 truncate">Eks HR & Staffing Solutions</span>
+        </div>
+        <div class="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-500 block text-[10px] sm:text-[11px] uppercase font-bold tracking-wider mb-1">Hosting Server</span>
+          <strong class="text-slate-900 block text-xs sm:text-sm">Exabytes LiteSpeed</strong>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">Versi PHP 8.1+ / 8.2</span>
+        </div>
+        <div class="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="text-slate-500 block text-[10px] sm:text-[11px] uppercase font-bold tracking-wider mb-1">Metodologi Rilis</span>
+          <strong class="text-emerald-700 block text-xs sm:text-sm">Sprint 9 Hari Kerja</strong>
+          <span class="text-[10px] sm:text-[11px] text-slate-500 block mt-0.5">Uji Coba UAT & Go-Live</span>
+        </div>
+      </div>
+
+      <!-- 2 Main Columns: Non-Technical vs Technical Environment -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+        
+        <!-- Kolom Kiri: 5 Pilar Persyaratan Non-Teknis -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm mb-3 pb-2 border-b border-slate-200">
+              <i class="ph-bold ph-sliders text-sky-700 text-lg"></i>
+              <span>1. Persyaratan Non-Teknis (Non-Technical Requirements)</span>
+            </div>
+            
+            <div class="space-y-3.5 text-slate-700">
+              <div>
+                <strong class="text-slate-900 block font-semibold mb-0.5">A. Usability (Kemudahan Penggunaan):</strong>
+                <p class="text-slate-600 leading-relaxed">
+                  Navigasi intuitif dengan aturan respon 3 detik: pengunjung langsung memahami identitas Acetalent dan menemukan kontak WhatsApp dalam 1 kali klik. Seluruh tombol sentuh minimal berukuran 44x44 piksel.
+                </p>
+              </div>
+
+              <div>
+                <strong class="text-slate-900 block font-semibold mb-0.5">B. Security (Keamanan Sistem):</strong>
+                <p class="text-slate-600 leading-relaxed">
+                  Enkripsi penuh SSL/HTTPS aktif, sanitasi ketat berkas unggahan CV (hanya menerima ekstensi .pdf/.docx dengan batasan ukuran 5 MB), eliminasi celah keamanan PHP lama, dan proteksi anti-spam otomatis.
+                </p>
+              </div>
+
+              <div>
+                <strong class="text-slate-900 block font-semibold mb-0.5">C. Performance (Performa & Kecepatan):</strong>
+                <p class="text-slate-600 leading-relaxed">
+                  Target waktu buka awal halaman di bawah 2 detik didukung akselerasi server LiteSpeed Exabytes dan kompresi gambar format modern WebP.
+                </p>
+              </div>
+
+              <div>
+                <strong class="text-slate-900 block font-semibold mb-0.5">D. Maintainability (Kemudahan Pemeliharaan):</strong>
+                <p class="text-slate-600 leading-relaxed">
+                  Staf kantor non-IT dapat mengubah informasi kontak atau mengunggah data lowongan kerja mandiri semudah mengetik di Word tanpa koding.
+                </p>
+              </div>
+
+              <div>
+                <strong class="text-slate-900 block font-semibold mb-0.5">E. Scalability (Skalabilitas Sistem):</strong>
+                <p class="text-slate-600 leading-relaxed">
+                  Arsitektur sistem modular yang siap dikembangkan untuk penambahan integrasi portal pelamar karir di masa mendatang.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Lingkungan Teknis & Diagram Alur Pengguna -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 text-slate-900 font-bold text-sm mb-3 pb-2 border-b border-slate-200">
+              <i class="ph-bold ph-hard-drives text-emerald-700 text-lg"></i>
+              <span>2. Lingkungan Teknis & Alur Pengguna (Technical Specs)</span>
+            </div>
+
+            <!-- Server Specs Table -->
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
+                <span class="text-slate-500 font-medium">Penyedia Hosting:</span>
+                <strong class="text-slate-900 font-semibold">Exabytes Network Malaysia (cPanel)</strong>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
+                <span class="text-slate-500 font-medium">Arsitektur Web Server:</span>
+                <strong class="text-slate-900 font-semibold">LiteSpeed Web Server Enterprise</strong>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
+                <span class="text-slate-500 font-medium">Versi PHP Server:</span>
+                <strong class="text-emerald-700 font-semibold">PHP 8.1+ / 8.2 (Secure Environment)</strong>
+              </div>
+              <div class="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200">
+                <span class="text-slate-500 font-medium">Sistem Basis Data:</span>
+                <strong class="text-slate-900 font-semibold">MySQL 5.7+ / MariaDB 10.3+</strong>
+              </div>
+            </div>
+
+            <!-- Diagram Alur Persona Pengguna -->
+            <div>
+              <strong class="text-slate-900 block font-semibold mb-2">Diagram Alur Pengguna (User Persona Flows):</strong>
+              <div class="space-y-2">
+                <div class="p-3 rounded-lg bg-white border border-slate-200 leading-relaxed">
+                  <span class="font-bold text-sky-800 block text-[11px] mb-0.5">Alur 1: Klien Korporat B2B</span>
+                  <span class="text-slate-600 block text-[11px]">Buka Beranda -> Tinjau 7 Sektor Industri & Legalitas -> Klik WhatsApp / Form Permintaan SDM -> Notifikasi Masuk ke Tim Sales Acetalent -> Pembahasan Kontrak Kerjasama.</span>
+                </div>
+                <div class="p-3 rounded-lg bg-white border border-slate-200 leading-relaxed">
+                  <span class="font-bold text-emerald-800 block text-[11px] mb-0.5">Alur 2: Pencari Kerja / Kandidat</span>
+                  <span class="text-slate-600 block text-[11px]">Buka Halaman Lowongan -> Pilih Posisi yang Tersedia -> Unggah Berkas CV Format PDF -> Berkas Masuk Rapi ke Email Resmi Manajemen -> Pemanggilan Wawancara.</span>
+                </div>
+                <div class="p-3 rounded-lg bg-white border border-slate-200 leading-relaxed">
+                  <span class="font-bold text-slate-800 block text-[11px] mb-0.5">Alur 3: Staf Kantor Acetalent (Admin Non-IT)</span>
+                  <span class="text-slate-600 block text-[11px]">Login Dashboard WordPress -> Menu Lowongan / Kontak -> Tulis Posisi Baru / Ubah Data -> Website Otomatis Memperbarui Informasi Tanpa Koding.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Glosarium Singkatan & Istilah Teknis (Sesuai Development PRD Template) -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200">
+        <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+          <i class="ph-bold ph-book-open text-sky-700"></i> Kamus Istilah & Glosarium Dokumen PRD:
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs">
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">B2B (Business-to-Business)</strong>
+            <span class="text-slate-500 text-[11px]">Model interaksi antara Acetalent dengan perusahaan pengguna jasa tenaga kerja.</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">CMS (Content Management System)</strong>
+            <span class="text-slate-500 text-[11px]">Sistem pengelola konten yang memungkinkan staf non-IT memperbarui web tanpa koding.</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">GSC (Google Search Console)</strong>
+            <span class="text-slate-500 text-[11px]">Sarana verifikasi dan pemantauan resmi indeks pencarian website di mesin Google.</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">SSL / HTTPS</strong>
+            <span class="text-slate-500 text-[11px]">Protokol enkripsi keamanan transmisi data pengguna saat mengakses situs web.</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">UAT (User Acceptance Test)</strong>
+            <span class="text-slate-500 text-[11px]">Uji coba kelayakan fungsi oleh perwakilan Acetalent sebelum peluncuran resmi.</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+            <strong class="text-slate-900 block font-semibold">JS-SEZ</strong>
+            <span class="text-slate-500 text-[11px]">Johor-Singapore Special Economic Zone, zona pemicu lonjakan kebutuhan staf industri.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE CONFIRMATION MODAL (SHADCN DIALOG) ================= -->
+  <div id="order-modal" onclick="if (event.target === this) closeModal()" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-2xl max-w-md w-full p-4 sm:p-6 shadow-2xl border border-slate-200 transform scale-95 transition-transform duration-200" id="order-modal-box">
+      
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm">
+            <i class="ph-bold ph-handshake"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Konfirmasi Pemilihan Paket</h3>
+            <p class="text-[11px] text-slate-500">Pembaruan Website Resmi Acetalent</p>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-slate-700 p-2 rounded-lg hover:bg-slate-100 min-h-[36px] min-w-[36px] flex items-center justify-center">
+          <i class="ph-bold ph-x text-base"></i>
+        </button>
+      </div>
+
+      <div class="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-4 text-xs">
+        <span class="text-slate-500 block mb-0.5 font-medium">Paket yang Dipilih:</span>
+        <strong class="text-slate-900 text-sm font-bold block" id="modal-package-name">Paket Business Growth (Rp 3.200.000)</strong>
+        <span class="text-emerald-700 font-medium block mt-1">Estimasi Waktu: 6 sampai 7 Hari Kerja</span>
+      </div>
+
+      <p class="text-xs text-slate-600 leading-relaxed mb-5">
+        Pilihan paket ini sudah tersimpan. Tim kami siap memulai proses backup dan perbaikan hosting Exabytes begitu akses cPanel diberikan. Anda dapat langsung mengonfirmasi via WhatsApp atau menyimpan ringkasan penawaran.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center gap-2.5">
+        <button onclick="window.print()" class="w-full sm:w-1/2 py-2.5 px-3 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all text-center min-h-[44px]">
+          <i class="ph-bold ph-printer mr-1"></i> Simpan PDF
+        </button>
+        <button onclick="hubungiWhatsApp()" class="w-full sm:w-1/2 py-2.5 px-3 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all text-center shadow-sm min-h-[44px]">
+          <i class="ph-bold ph-whatsapp-logo mr-1 text-sm"></i> Konfirmasi WA
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= EXECUTIVE CORPORATE FOOTER ================= -->
+  <footer class="border-t border-slate-200 bg-white mt-12 sm:mt-16">
+    <div class="doc-container py-10 sm:py-12">
+      
+      <!-- Top Grid: Brand & Operational Info + Quick Links -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-slate-200">
+        
+        <!-- Col 1: Brand & Entity Details (6 cols on md) -->
+        <div class="md:col-span-6 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center font-extrabold text-sm tracking-wider shadow-sm">
+              AT
+            </div>
+            <div>
+              <span class="text-sm font-bold text-slate-900 block leading-tight">Acetalent Staffing Solutions</span>
+              <span class="text-[11px] text-slate-500 block">Dahulu beroperasi sebagai HR & Staffing Solutions Sdn Bhd</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed max-w-md">
+            Penyedia solusi ketenagakerjaan resmi untuk penempatan karyawan permanen, kontrak, dan temporer di kawasan industri Johor Bahru, Sarawak, dan koridor ekonomi Malaysia-Singapura.
+          </p>
+          <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-slate-600">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">
+              <i class="ph-bold ph-map-pin text-sky-700"></i> Menara Public Bank Lt. 24, Johor Bahru
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200">
+              <i class="ph-bold ph-buildings text-emerald-700"></i> Head Office: Kuching, Sarawak
+            </span>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links (3 cols on md) -->
+        <div class="md:col-span-3 space-y-2.5 text-xs">
+          <strong class="text-slate-900 block font-bold text-xs uppercase tracking-wider mb-2">Navigasi Dokumen</strong>
+          <ul class="space-y-2 text-slate-600">
+            <li><a href="#audit" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> Audit & Masalah Website</a></li>
+            <li><a href="#profil" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> Profil & 7 Sektor Industri</a></li>
+            <li><a href="#swot" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> Analisis Strategis SWOT</a></li>
+            <li><a href="#desain" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> 8 Konsep Desain Kelas Dunia</a></li>
+            <li><a href="#pricelist" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> 3 Pilihan Paket Investasi</a></li>
+            <li><a href="#komparasi" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> Tabel Matriks Evaluasi</a></li>
+            <li><a href="#ketentuan" class="hover:text-slate-900 transition-colors flex items-center gap-1.5"><i class="ph-bold ph-caret-right text-slate-400 text-[10px]"></i> Ketentuan & Pembayaran</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Document Status & Action (3 cols on md) -->
+        <div class="md:col-span-3 space-y-3 text-xs">
+          <strong class="text-slate-900 block font-bold text-xs uppercase tracking-wider mb-2">Status Penawaran</strong>
+          <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-500">Kode PRD:</span>
+              <span class="font-bold text-slate-900 font-mono">DOC-PRD-2025.V2</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-500">Server Hosting:</span>
+              <span class="font-bold text-slate-900">Exabytes Malaysia</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-500">Target Pelaksanaan:</span>
+              <span class="font-bold text-emerald-700">Sprint 9 Hari Kerja</span>
+            </div>
+          </div>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-full py-2 px-3 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all flex items-center justify-center gap-1.5 border border-slate-200">
+            <i class="ph-bold ph-arrow-up text-sm"></i>
+            <span>Kembali ke Bagian Atas</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar: Copyright & Compliance -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p class="text-slate-600 text-center sm:text-left">
+          Hak Cipta © 2025 Acetalent. Seluruh data spesifikasi teknis dan penawaran dilindungi kerahasiaan profesional.
+        </p>
+        <div class="flex items-center gap-2 text-[11px] text-slate-500">
+          <span class="inline-flex items-center gap-1 text-emerald-700 font-medium">
+            <i class="ph-bold ph-check-circle"></i> Standar PRD Terverifikasi
+          </span>
+          <span>•</span>
+          <span>Pedoman Anti-Slop Aktif</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= NOTIFICATION TOAST ================= -->
+  <div id="toast" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 max-w-sm bg-slate-900 text-white p-3.5 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none transform translate-y-3 z-50 border border-slate-700">
+    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+      <i class="ph-bold ph-check-circle text-emerald-400 text-lg shrink-0"></i>
+      <div class="min-w-0">
+        <strong class="text-xs block text-white" id="toast-title">Paket Dipilih</strong>
+        <span class="text-[11px] text-slate-300 block" id="toast-desc">Pilihan paket tersorot dan siap diajukan ke klien.</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= MOBILE EXECUTIVE BOTTOM NAVIGATION WIDGET (LG:HIDDEN) ================= -->
+  <nav id="mobile-bottom-nav" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] lg:hidden">
+    <div class="grid grid-cols-5 items-center text-center">
+      
+      <!-- Tab 1: Audit -->
+      <a href="#audit" onclick="ensureProposalTab()" class="flex flex-col items-center justify-center py-2 px-1 text-slate-600 hover:text-slate-900 active:bg-slate-50 transition-colors min-h-[54px]">
+        <i class="ph-bold ph-clipboard-text text-lg"></i>
+        <span class="text-[10px] font-semibold mt-0.5 leading-none">Audit</span>
+      </a>
+
+      <!-- Tab 2: SWOT -->
+      <a href="#swot" onclick="ensureProposalTab()" class="flex flex-col items-center justify-center py-2 px-1 text-slate-600 hover:text-slate-900 active:bg-slate-50 transition-colors min-h-[54px]">
+        <i class="ph-bold ph-chart-polar text-lg"></i>
+        <span class="text-[10px] font-semibold mt-0.5 leading-none">SWOT</span>
+      </a>
+
+      <!-- Tab 3: 8 Desain (Primary Featured) -->
+      <a href="#desain" onclick="ensureProposalTab()" class="flex flex-col items-center justify-center py-2 px-1 text-sky-700 font-bold active:bg-sky-50 transition-colors min-h-[54px]">
+        <div class="relative inline-block">
+          <i class="ph-bold ph-browsers text-lg"></i>
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-600 absolute -top-0.5 -right-1"></span>
+        </div>
+        <span class="text-[10px] font-bold mt-0.5 leading-none">8 Desain</span>
+      </a>
+
+      <!-- Tab 4: Paket -->
+      <a href="#pricelist" onclick="ensureProposalTab()" class="flex flex-col items-center justify-center py-2 px-1 text-slate-600 hover:text-slate-900 active:bg-slate-50 transition-colors min-h-[54px]">
+        <i class="ph-bold ph-cube text-lg"></i>
+        <span class="text-[10px] font-semibold mt-0.5 leading-none">Paket</span>
+      </a>
+
+      <!-- Tab 5: Lainnya (3 Titik -> Bottom Sheet) -->
+      <button onclick="toggleBottomSheet()" class="flex flex-col items-center justify-center py-2 px-1 text-slate-600 hover:text-slate-900 active:bg-slate-50 transition-colors min-h-[54px] focus-visible:outline-none">
+        <i class="ph-bold ph-dots-three-circle text-lg"></i>
+        <span class="text-[10px] font-semibold mt-0.5 leading-none">Lainnya</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ================= MOBILE BOTTOM SHEET (MORE NAVIGATION DRAWER) ================= -->
+  <div id="bottom-sheet-backdrop" onclick="closeBottomSheet()" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
+  
+  <div id="bottom-sheet-panel" class="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-2xl border-t border-slate-200 p-5 shadow-2xl transform translate-y-full transition-transform duration-300 max-h-[85vh] overflow-y-auto lg:hidden">
+    <!-- Drag handle -->
+    <div class="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-4 cursor-pointer" onclick="closeBottomSheet()"></div>
+    
+    <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+      <div>
+        <h4 class="text-sm font-bold text-slate-900">Navigasi Lengkap Dokumen</h4>
+        <p class="text-[11px] text-slate-500">Pilih bagian yang ingin Anda tuju langsung</p>
+      </div>
+      <button onclick="closeBottomSheet()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 min-h-[36px] min-w-[36px] flex items-center justify-center">
+        <i class="ph-bold ph-x text-base"></i>
+      </button>
+    </div>
+
+    <!-- Navigation Links Grid -->
+    <div class="grid grid-cols-2 gap-2 text-xs font-semibold mb-4">
+      <a href="#audit" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-clipboard-text text-sky-700 text-base"></i>
+        <span>Audit Situasi</span>
+      </a>
+      <a href="#profil" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-buildings text-emerald-700 text-base"></i>
+        <span>Profil 7 Sektor</span>
+      </a>
+      <a href="#swot" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-chart-polar text-amber-700 text-base"></i>
+        <span>Analisis SWOT</span>
+      </a>
+      <a href="#desain" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-sky-50 border border-sky-200 text-sky-900 font-bold flex items-center gap-2">
+        <i class="ph-bold ph-browsers text-sky-600 text-base"></i>
+        <span>8 Desain Global</span>
+      </a>
+      <a href="#pricelist" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-cube text-slate-700 text-base"></i>
+        <span>Pilihan Paket</span>
+      </a>
+      <a href="#komparasi" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-table text-indigo-700 text-base"></i>
+        <span>Tabel Matriks</span>
+      </a>
+      <a href="#ketentuan" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-shield-check text-blue-700 text-base"></i>
+        <span>Ketentuan</span>
+      </a>
+      <a href="#faq" onclick="ensureProposalTab(); closeBottomSheet();" class="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 flex items-center gap-2 text-slate-800">
+        <i class="ph-bold ph-question text-purple-700 text-base"></i>
+        <span>Tanya Jawab</span>
+      </a>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="space-y-2 pt-2 border-t border-slate-100">
+      <button onclick="switchTab('prd'); closeBottomSheet();" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 min-h-[44px]">
+        <i class="ph-bold ph-code-block text-slate-600"></i> Buka Dokumen Spesifikasi PRD
+      </button>
+      <button onclick="window.print(); closeBottomSheet();" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs min-h-[44px]">
+        <i class="ph-bold ph-printer"></i> Cetak / Unduh PDF Dokumen
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ================= SCRIPTS: ANIME.JS & INTERACTIVITY ================= -->
+  <script>
+    let selectedPackage = 'Paket Business Growth (Rp 3.200.000)';
+
+
+    // Native High-Performance IntersectionObserver for Super Smooth Scroll Reveal
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.scroll-reveal');
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.02,
+          rootMargin: '0px 0px 50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+      } else {
+        revealElements.forEach(el => el.classList.add('revealed'));
+      }
+    });
+
+    // Throttled 60/120fps GPU Scroll Progress (Passive & RAF)
+    let scrollTicking = false;
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          const doc = document.documentElement;
+          const winScroll = doc.scrollTop || document.body.scrollTop;
+          const height = doc.scrollHeight - doc.clientHeight;
+          if (height > 0 && progressBar) {
+            const ratio = Math.min(Math.max(winScroll / height, 0), 1);
+            progressBar.style.transform = `scaleX(${ratio})`;
+          }
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // View Switcher (Shadcn Tabs: Proposal vs PRD)
+    function switchTab(tab) {
+      const viewProposal = document.getElementById('view-proposal');
+      const viewPrd = document.getElementById('view-prd');
+      const btnProposal = document.getElementById('tab-btn-proposal');
+      const btnPrd = document.getElementById('tab-btn-prd');
+      const mobileNav = document.getElementById('mobile-quick-nav');
+
+      if (tab === 'proposal') {
+        viewProposal.classList.remove('hidden');
+        viewPrd.classList.add('hidden');
+        if (mobileNav) mobileNav.classList.remove('hidden');
+        btnProposal.className = 'flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md bg-white text-slate-900 shadow-sm transition-all flex items-center justify-center gap-1.5 text-center text-xs font-bold min-h-[36px]';
+        btnPrd.className = 'flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center text-xs font-semibold min-h-[36px]';
+      } else {
+        viewProposal.classList.add('hidden');
+        viewPrd.classList.remove('hidden');
+        if (mobileNav) mobileNav.classList.add('hidden');
+        btnPrd.className = 'flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md bg-white text-slate-900 shadow-sm transition-all flex items-center justify-center gap-1.5 text-center text-xs font-bold min-h-[36px]';
+        btnProposal.className = 'flex-1 sm:flex-initial px-3 py-1.5 sm:py-2 rounded-md text-slate-600 hover:text-slate-900 transition-all flex items-center justify-center gap-1.5 text-center text-xs font-semibold min-h-[36px]';
+      }
+    }
+
+    
+    // Mobile Bottom Sheet Navigation Functions
+    function toggleBottomSheet() {
+      const backdrop = document.getElementById('bottom-sheet-backdrop');
+      const panel = document.getElementById('bottom-sheet-panel');
+      if (!backdrop || !panel) return;
+
+      const isClosed = panel.classList.contains('translate-y-full');
+      if (isClosed) {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        panel.classList.remove('translate-y-full');
+      } else {
+        closeBottomSheet();
+      }
+    }
+
+    function closeBottomSheet() {
+      const backdrop = document.getElementById('bottom-sheet-backdrop');
+      const panel = document.getElementById('bottom-sheet-panel');
+      if (panel) panel.classList.add('translate-y-full');
+      if (backdrop) backdrop.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // Keyboard Accessibility: Escape key closes modal & bottom sheet (R-32)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeBottomSheet();
+      }
+    });
+
+    // Ensure viewing proposal tab when jumping from PRD to proposal sections
+    function ensureProposalTab() {
+      const viewProposal = document.getElementById('view-proposal');
+      if (viewProposal && viewProposal.classList.contains('hidden')) {
+        switchTab('proposal');
+      }
+    }
+
+    // Interactive Accordion (21st.dev Style)
+    function toggleAccordion(id) {
+      const content = document.getElementById(id + '-content');
+      const icon = document.getElementById(id + '-icon');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    // Open Modal when Package Clicked
+    function pilihPaket(nama) {
+      selectedPackage = nama;
+      document.getElementById('modal-package-name').textContent = nama;
+      
+      const modal = document.getElementById('order-modal');
+      const box = document.getElementById('order-modal-box');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      box.classList.remove('scale-95');
+      box.classList.add('scale-100');
+
+      // Also trigger toast notification
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-title').textContent = nama;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      }, 3500);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('order-modal');
+      const box = document.getElementById('order-modal-box');
+      box.classList.remove('scale-100');
+      box.classList.add('scale-95');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function hubungiWhatsApp() {
+      const msg = encodeURIComponent(`Halo, saya ingin konfirmasi kelanjutan proyek Redesign Website Acetalent untuk: ${selectedPackage}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
+      closeModal();
+    }
+  </script>
+
+</body>
+</html>
